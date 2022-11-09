@@ -9,13 +9,15 @@ import Button from '../../UI/Button/Button';
 		label {
 			font-weight: bold;
 			display: block;
+      colot :  ${(props) => (props.invalid ? 'red' : 'black')}
 			margin-bottom: 0.5rem;
 		}
 
 		& input {
 			display: block;
 			width: 100%;
-			border: 1px solid #ccc;
+			border: 1px solid ${(props) => (props.invalid ? 'red' : '#ccc')};
+      backgroumd: ${(props) => (props.invalid ? '#ffd7d7' : 'transparent')}
 			font: inherit;
 			line-height: 1.5rem;
 			padding: 0 0.25rem;
@@ -25,15 +27,6 @@ import Button from '../../UI/Button/Button';
 			outline: none;
 			background: #fad0ec;
 			border-color: #8b005d;
-		}
-
-		&.invalid input {
-			border-color: red;
-			background: #ffd7d7;
-		}
-
-		&.invalid label {
-			color: red;
 		}
 	`;
 
@@ -63,12 +56,9 @@ const CourseInput = props => {
 
   return (
 		<form onSubmit={formSubmitHandler}>
-			<FormControl className={ !isValid && 'invalid' }>
+			<FormControl invalid = {!isValid}>
 				<label>Course Goal</label>
-				<input
-					type='text'
-					onChange={goalInputChangeHandler}
-				/>
+				<input type='text' onChange={goalInputChangeHandler} />
 			</FormControl>
 			<Button type='submit'>Add Goal</Button>
 		</form>
